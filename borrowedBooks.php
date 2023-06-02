@@ -1,6 +1,7 @@
 <?php
 include "path.php";
-include "app/controls/topics.php"
+include "app/controls/books.php";
+$borrows = selectBorrowedBooksByUserID('books', 'borrowings');
 ?>
 <!doctype html>
 <html lang="ru">
@@ -28,59 +29,32 @@ include "app/controls/topics.php"
     <div class="content row">
         <!--Main content-->
         <div class="main-content col-md-9 col-12">
-            <h2>Книги читателя</h2>
-            <div class="post row">
-                <div class="img col-12 col-md-4">
-                    <img src="assets/images/img_2.png" alt="" class="img-thumbnail">
+            <h2>Арендованные книги</h2>
+            <?php foreach ($borrows as $post): ?>
+                <div class="post row">
+                    <div class="img col-12 col-md-4">
+                        <img src="<?=BASE_URL . "assets/images/posts/" . $post['image']?>" alt="<?=$post['name']?>" class="img-thumbnail">
+                    </div>
+                    <div class="post-text col-12 col-md-8">
+                        <h3>
+                            <?php if(strlen($post['name']) > 100): ?>
+                                <a href="<?=BASE_URL . "single.php?post=" . $post['book_id'];?>"><?=substr($post['name'], 0, 120) . "..."?></a>
+                            <?php else: ?>
+                                <a href="<?=BASE_URL . "single.php?post=" . $post['book_id'];?>"><?=$post['name']?></a>
+                            <?php endif;?>
+                        </h3>
+                        <i class="far fa-user"><?=$post['author']?></i>
+                        <i class="far fa-calendar"> Год издания: <?=$post['pYear']?></i>
+                        <i class="far fa-calendar"> Дата аренды книги: <?=$post['date_borrowed']?></i>
+                        <?php if(strlen($post['annotation']) > 199): ?>
+                            <p class="preview-text"> <?=substr($post['annotation'], 0, 200) . "..."?></p>
+                        <?php else: ?>
+                            <p class="preview-text"> <?=$post['annotation']?></p>
+                        <?php endif;?>
+                    </div>
                 </div>
-                <div class="post-text col-12 col-md-8">
-                    <h3>
-                        <a href="#">Война и мир. Лев Николаевич Толстой</a>
-                    </h3>
-                    <i class="far fa-user"> Имя Автора</i>
-                    <i class="far fa-calendar"> May 17, 2023</i>
-                    <p class="preview-text">
-                        Аннотация
-                    </p>
-                </div>
-            </div>
-            <div class="post row">
-                <div class="img col-12 col-md-4">
-                    <img src="assets/images/img_2.png" alt="" class="img-thumbnail">
-                </div>
-                <div class="post-text col-12 col-md-8">
-                    <h3>
-                        <a href="#">Война и мир. Лев Николаевич Толстой</a>
-                    </h3>
-                    <i class="far fa-user"> Имя Автора</i>
-                    <i class="far fa-calendar"> May 17, 2023</i>
-                    <p class="preview-text">
-                        Аннотация
-                    </p>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
-        <!--Sidebar Content-->
-        <div class="sidebar col-md-3 col-12">
-
-            <div class="section search">
-                <h3>Поиск</h3>
-                <form action="#" method="post">
-                    <input type="text" name="search-term" class="text-input" placeholder="Поиск...">
-                </form>
-            </div>
-
-            <div class="section topics">
-                <h3>Категории</h3>
-                <ul>
-                    <?php foreach ($allTopics as $key => $topic): ?>
-                        <li>
-                            <a href="#"><?= $topic['name']; ?></a>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-
         </div>
     </div>
 </div>

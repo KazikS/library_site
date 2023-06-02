@@ -48,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['topic-edit'])) {
 
+
     $name = trim($_POST['name']);
     $description = trim($_POST['description']);
 

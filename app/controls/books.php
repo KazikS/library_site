@@ -72,6 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_book'])) {
             ];
             $bookInsert = insert('books', $book);
             $bookSelectOne = selectOne('topics', ['id' => $id]);
+
             header('location: ' . BASE_URL . 'admin/posts/index.php');
 
     }
@@ -89,14 +90,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_book'])) {
     $annotation = '';
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['take-book'])){
+    $user_id = $_SESSION['id'];
+    $book_id = $_POST['id'];
+    $date_borrowed = date('Y-m-d');
+    $params = [
+        'user_id' => $user_id,
+        'book_id' => $book_id,
+        'date_borrowed' => $date_borrowed,
+    ];
 
-$user_id = '';
-$book_id = '';
-$date_borrowed = '';
-$date_returned = '';
-
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['take_book'])) {
-    echo "Take book";
+    $taken = insert('borrowings', $params);
+    header('location: ' . BASE_URL . 'borrowedBooks.php');
 }
+
+
+
+
 

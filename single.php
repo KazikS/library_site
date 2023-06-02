@@ -1,5 +1,6 @@
 <?php include "path.php";
 include "app/controls/books.php";
+
 $post = selectOne('books', ['id' => $_GET['post']]);
 ?>
 <!doctype html>
@@ -38,10 +39,12 @@ $post = selectOne('books', ['id' => $_GET['post']]);
                     <p> <?=$post['annotation']?></p>
                 </div>
             </div>
-            <div class="col mb-4">
-                <button name="take_book" class="btn btn-secondary" type="submit">Взять книгу</button>
-                <button name="return_book" class="btn btn-secondary" type="submit">Вернуть книгу</button>
-            </div>
+            <form action="single.php" method="post">
+                <input name="id" value="<?=$_GET['post'];?>" type="hidden">
+                <div class="col mb-4">
+                    <button name="take-book" class="btn btn-secondary" type="submit">Взять книгу</button>
+                </div>
+            </form>
         </div>
         <!--Sidebar Content-->
         <div class="sidebar col-md-3 col-12">

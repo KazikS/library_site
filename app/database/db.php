@@ -131,9 +131,10 @@ function delete($table, $id){
     dbCheckError($query);
 }
 
-function selectTopBooksFromPostsOnIndex($table){
+function selectBorrowedBooksByUserID($table1, $table2){ //books, borrowings
     global $pdo;
-    $sql = "SELECT *";
+
+    $sql = "SELECT * FROM $table1 JOIN $table2 ON $table1.id = $table2.book_id WHERE $table2.user_id = " . $_SESSION['id'];
     $query = $pdo->prepare($sql);
     $query->execute();
     dbCheckError($query);

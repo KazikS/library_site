@@ -4,7 +4,7 @@
             <div class="footer-section about col-md-4 col-12">
                 <h3 class="logo-text">Библиотека</h3>
                 <p>
-                    Этот сайт библиотеки создан как курсовой проект Сабанаева Казбека
+                    Этот сайт библиотеки создан как курсовой проект командой Сабанаева Казбека
                 </p>
                 <div class="contact">
                     <span><i class="fas fa-phone"></i> &nbsp; 123-456-789</span>
@@ -36,7 +36,7 @@
             </div>
 
             <div class="footer-bottom">
-                &copy; library.com | Created by Kazbek Sabanaev
+                &copy; library.com | Created by Kazbek Sabanaev's team
             </div>
 
         </div>
