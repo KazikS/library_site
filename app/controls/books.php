@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_book'])) {
                 'number' => $number,
                 'cipher' => $cipher,
                 'type' => $book_type,
-                'name' => $name,
+                'nameOfBook' => $name,
                 'genre' => $genre,
                 'pHouse' => $publishing_house,
                 'pYear' => $publishing_year,

@@ -141,3 +141,22 @@ function selectBorrowedBooksByUserID($table1, $table2){ //books, borrowings
     return $query->fetchAll();
 }
 
+function selectAllBooksByGenre($table1, $table2){ //books, topics
+    global $pdo;
+    $sql = "SELECT $table1.* FROM $table1 JOIN topics ON $table1.genre = $table2.name WHERE $table2.id =" . $_GET['id'];
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+    return $query->fetchAll();
+}
+
+//поиск по заголовку
+function searchByNameOfBook($text, $table1){
+    $text = trim(strip_tags(stripcslashes(htmlspecialchars($text))));
+    global $pdo;
+    $sql = "SELECT * FROM $table1 WHERE nameOfBook LIKE '%$text%' ";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+    return $query->fetchAll();
+}

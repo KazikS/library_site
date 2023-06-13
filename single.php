@@ -25,7 +25,7 @@ $post = selectOne('books', ['id' => $_GET['post']]);
     <div class="content row">
         <!--Main content-->
         <div class="main-content col-md-9 col-12">
-            <h2><?=$post['name']?></h2>
+            <h2><?=$post['nameOfBook']?></h2>
             <div class="single_post row">
                 <div class="img col-12">
                     <img src="<?=BASE_URL . "assets/images/posts/" . $post['image']?>" alt="" class="img-thumbnail">

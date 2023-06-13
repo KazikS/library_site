@@ -30,6 +30,13 @@ $borrows = selectBorrowedBooksByUserID('books', 'borrowings');
         <!--Main content-->
         <div class="main-content col-md-9 col-12">
             <h2>Арендованные книги</h2>
+            <p>
+                Для получения книги, обратитесь в библиотеку. Функция оформления онлайн-заказа и доставки находится в разработке
+            </p>
+            <p>
+                Книга будет удалена из списка после ее возвращения
+            </p>
+            <div class="h-10"></div>
             <?php foreach ($borrows as $post): ?>
                 <div class="post row">
                     <div class="img col-12 col-md-4">
@@ -37,17 +44,17 @@ $borrows = selectBorrowedBooksByUserID('books', 'borrowings');
                     </div>
                     <div class="post-text col-12 col-md-8">
                         <h3>
-                            <?php if(strlen($post['name']) > 100): ?>
-                                <a href="<?=BASE_URL . "single.php?post=" . $post['book_id'];?>"><?=substr($post['name'], 0, 120) . "..."?></a>
+                            <?php if(strlen($post['nameOfBook']) > 100): ?>
+                                <a href="<?=BASE_URL . "single.php?post=" . $post['book_id'];?>"><?=substr($post['nameOfBook'], 0, 120) . "..."?></a>
                             <?php else: ?>
-                                <a href="<?=BASE_URL . "single.php?post=" . $post['book_id'];?>"><?=$post['name']?></a>
+                                <a href="<?=BASE_URL . "single.php?post=" . $post['book_id'];?>"><?=$post['nameOfBook']?></a>
                             <?php endif;?>
                         </h3>
                         <i class="far fa-user"><?=$post['author']?></i>
                         <i class="far fa-calendar"> Год издания: <?=$post['pYear']?></i>
                         <i class="far fa-calendar"> Дата аренды книги: <?=$post['date_borrowed']?></i>
                         <?php if(strlen($post['annotation']) > 199): ?>
-                            <p class="preview-text"> <?=substr($post['annotation'], 0, 200) . "..."?></p>
+                            <p class="preview-text"> <?=mb_substr($post['annotation'], 0, 1200, 'UTF-8') . "..."?></p>
                         <?php else: ?>
                             <p class="preview-text"> <?=$post['annotation']?></p>
                         <?php endif;?>

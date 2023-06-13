@@ -37,7 +37,7 @@ include "../../app/controls/books.php"
         <?php foreach ($allBooks as $key => $book): ?>
         <div class="row post">
             <div class="id col-1"><?=$key + 1;?></div>
-            <div class="name col-7"><?=$book['name'];?></div>
+            <div class="name col-7"><?=$book['nameOfBook'];?></div>
             <div class="author col"><?=$book['author'];?></div>
         </div>
         <?php endforeach; ?>

@@ -1,7 +1,8 @@
 <?php
 include "path.php";
 include "app/controls/topics.php";
-$posts = selectAll('books');
+$posts = selectAllBooksByGenre('books', 'topics');
+$category = selectOne('topics', ['id' => $_GET['id']]);
 ?>
 <!doctype html>
 <html lang="ru">
@@ -22,53 +23,6 @@ $posts = selectAll('books');
 
 <?php include("app/include/header.php"); ?>
 
-<!--блок карусели start-->
-<div class="container">
-    <div class="row">
-        <h2 class="slider-title">Топ книг</h2>
-    </div>
-    <div id="carouselExampleCaptions" class="carousel slide">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="assets/images/img_1.png" class="d-block w-100" alt="...">
-                <div class="carousel-caption-hack carousel-caption d-none d-md-block">
-                    <h5><a href="#">First slide label</a></h5>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="assets/images/img_2.png" class="d-block w-100" alt="...">
-                <div class="carousel-caption-hack carousel-caption d-none d-md-block">
-                    <h5>Second slide label</h5>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="assets/images/img_3.png" class="d-block w-100" alt="...">
-                <div class="carousel-caption-hack carousel-caption d-none d-md-block">
-                    <h5>Third slide label</h5>
-                </div>
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-                data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-                data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-</div>
-<!--блок карусели end-->
 
 <!--блок main-->
 
@@ -76,7 +30,8 @@ $posts = selectAll('books');
     <div class="content row">
         <!--Main content-->
         <div class="main-content col-md-9 col-12">
-            <h2>Последние книги</h2>
+            <h2><strong><?=$category['name']?></strong></h2>
+            <p><?=$category['description']?></p>
             <?php foreach ($posts as $post): ?>
             <div class="post row">
                 <div class="img col-12 col-md-4">
@@ -106,7 +61,7 @@ $posts = selectAll('books');
 
             <div class="section search">
                 <h3>Поиск</h3>
-                <form action="search.php" method="post">
+                <form action="#" method="post">
                     <input type="text" name="search-term" class="text-input" placeholder="Поиск...">
                 </form>
             </div>
